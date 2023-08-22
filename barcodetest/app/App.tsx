@@ -1,15 +1,35 @@
 import React from 'react';
-import {SafeAreaView, Text, View, Button} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
-import * as style from './styles';
+import {Start} from './module-sto-in/screens/start';
+import {InfomationConfirmation} from './module-sto-in/screens/sto-information-confirmation';
+import {PreviewMode} from './module-sto-in/screens/sto-preview-mode';
+
+import {Colors} from './theme';
 
 export const App = () => {
+  const Stack = createStackNavigator();
+
   return (
-    <SafeAreaView style={style.SAFEAREAVIEW}>
-      <View style={style.APP}>
-        <Text>test</Text>
-        <Button title="press me" onPress={() => console.log('press me')} />
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="start"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: Colors.ColorPrimary,
+          },
+          headerTintColor: Colors.ColorTextWhite,
+          headerBackTitleVisible: false,
+          headerTitleAlign: 'left',
+        }}>
+        <Stack.Screen name="start" component={Start} />
+        <Stack.Screen
+          name="InfomationConfirmation"
+          component={InfomationConfirmation}
+        />
+        <Stack.Screen name="PreviewMode" component={PreviewMode} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
